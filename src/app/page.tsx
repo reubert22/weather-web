@@ -1,16 +1,17 @@
 "use client";
 
-import { getAstronomyData, getForecastData } from "@/data/api";
-import { IAstronomy, ILocation } from "@/interfaces";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
+import { getAstronomyData, getForecastData } from "@/data/api";
+import { IAstronomy, ICurrentLocation, ILocation } from "@/interfaces";
+
 export default function Home() {
-  const [position, setPosition] = useState<GeolocationPosition>();
   const [astronomy, setAstronomy] = useState<IAstronomy>();
-  const [location, setLocation] = useState<ILocation>();
-  const [currentForecast, setCurrentForecast] = useState<any>();
+  const [currentForecast, setCurrentForecast] = useState<ICurrentLocation>();
   const [loading, setLoading] = useState<boolean>();
+  const [location, setLocation] = useState<ILocation>();
+  const [position, setPosition] = useState<GeolocationPosition>();
 
   const handleGetCurrentPosition = () => {
     if (navigator.geolocation) {
@@ -63,9 +64,7 @@ export default function Home() {
       .query({ name: "geolocation" })
       .then((permissionStatus) => {
         permissionStatus.onchange = () => {
-          if (permissionStatus.state === "granted") {
-            handleGetCurrentPosition();
-          }
+          if (permissionStatus.state === "granted") handleGetCurrentPosition();
         };
       });
 
