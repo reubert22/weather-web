@@ -98,4 +98,4 @@ jobs:
         with:
           # Add your secret key as an environment variable
           env:
-            SECRET_KEY: ${{ secrets.YOUR_SECRET_KEY }}
+            NEXT_PUBLIC_WEATHER_API_KEY: ${{ secrets.NEXT_PUBLIC_WEATHER_API_KEY }}
