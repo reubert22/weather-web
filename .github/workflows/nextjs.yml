@@ -29,6 +29,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Check tag name
+        run: echo "Tag name is ${{ github.ref_name }}"
+
       - name: Checkout
         uses: actions/checkout@v4
       - name: Detect package manager
@@ -89,5 +92,10 @@ jobs:
     needs: build
     steps:
       - name: Deploy to GitHub Pages
+        if: startsWith(github.ref, 'refs/tags/release/')
         id: deployment
         uses: actions/deploy-pages@v3
+        with:
+          # Add your secret key as an environment variable
+          env:
+            SECRET_KEY: ${{ secrets.YOUR_SECRET_KEY }}
