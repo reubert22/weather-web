@@ -95,7 +95,5 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/release/')
         id: deployment
         uses: actions/deploy-pages@v3
-        with:
-          # Add your secret key as an environment variable
-          env:
-            NEXT_PUBLIC_WEATHER_API_KEY: ${{ secrets.NEXT_PUBLIC_WEATHER_API_KEY }}
+        env:
+          NEXT_PUBLIC_WEATHER_API_KEY: ${{ secrets.NEXT_PUBLIC_WEATHER_API_KEY }}
