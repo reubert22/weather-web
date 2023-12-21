@@ -100,7 +100,7 @@ jobs:
       - name: Echo >>>
         run: echo ${{ secrets.NEXT_PUBLIC_WEATHER_API_KEY }}
       - name: Echo Secret Value
-        run: echo "Secret Value: $NEXT_PUBLIC_WEATHER_API_KEY"
+        run: echo $NEXT_PUBLIC_WEATHER_API_KEY
       - name: Deploy to GitHub Pages
         if: startsWith(github.ref, 'refs/tags/release/')
         id: deployment
