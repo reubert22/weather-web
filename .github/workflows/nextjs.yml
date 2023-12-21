@@ -97,15 +97,13 @@ jobs:
     env:
         NEXT_PUBLIC_WEATHER_API_KEY: ${{ secrets.NEXT_PUBLIC_WEATHER_API_KEY }}
     steps:
-      - name: Echo >>>
-        run: echo ${{ secrets.NEXT_PUBLIC_WEATHER_API_KEY }}
-      - name: Echo Secret Value
-        run: echo $NEXT_PUBLIC_WEATHER_API_KEY
       - name: Deploy to GitHub Pages
         if: startsWith(github.ref, 'refs/tags/release/')
         id: deployment
         uses: actions/deploy-pages@v3
+        env:
+          NEXT_PUBLIC_WEATHER_API_KEY: ${{ secrets.NEXT_PUBLIC_WEATHER_API_KEY }}
         with:
           environment_name: github-pages
-          token: ${{ secrets.NEXT_PUBLIC_WEATHER_API_KEY }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
